@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">MouseCatElephant</string>
+    <string name="rulestitle">
+        <u>Rules</u>
+    </string>
+    <string name="rules">
+        \t1) Choose among a <font fgcolor='#FF696969'><b>mouse</b></font>, a <font fgcolor='#D0A0A0C0'><b>cat</b></font>, and an <font fgcolor='#FF708090'><b>elephant</b></font>.\n
+        \t2) Your opponent will choose an animal after.\n
+        \t3) The <font fgcolor='#FF696969'><b>mouse</b></font> beats the <font fgcolor='#FF708090'><b>elephant</b></font>.\n
+        \t4) The <font fgcolor='#FF708090'><b>elephant</b></font> beats the <font fgcolor='#D0A0A0C0'><b>cat</b></font>.\n
+        \t5) The <font fgcolor='#D0A0A0C0'><b>cat</b></font> beats the <font fgcolor='#FF696969'><b>mouse</b></font>.\n
+
+    </string>
+</resources>
