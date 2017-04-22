@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -14,17 +15,21 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     ImageButton mouseButton, catButton, elephantButton;
     ImageView playerChoice, computerChoice;
-    public String difficulty;
+    public String difficulty, user;
     TextView result, gameDifficulty;
     int[] playerMoves = {0, 0, 0};
-
+    DatabaseHandler db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        db = new DatabaseHandler(this);
 
         mouseButton = (ImageButton) findViewById(R.id.buttonMouse);
         mouseButton.setImageResource(R.drawable.mouse);
@@ -43,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
         difficulty = getIntent().getStringExtra("game_mode");
         gameDifficulty.setText("Mode: " + difficulty);
+
+        user = getIntent().getStringExtra("user_name");
 
         MyOnClickListener myOnClickListener = new MyOnClickListener();
         mouseButton.setOnClickListener(myOnClickListener);
@@ -98,9 +105,24 @@ public class MainActivity extends AppCompatActivity {
                 else computerChoice.setImageResource(R.drawable.elephant);
 
                 //display the result of the player and computer choices
-                if (getResult(player, computer).equals("You tied!")) result.setTextColor(Color.BLACK);
-                else if (getResult(player, computer).equals("You lose!")) result.setTextColor(getColor(R.color.red));
-                else result.setTextColor(getColor(R.color.blue));
+                if (getResult(player, computer).equals("You tied!")) {
+                    db.updateScores( user , "d");
+                    int scores[] = db.getScores(user);
+                    gameDifficulty.setText("Mode: " + difficulty + "\t\t" + user + "\tWins: " + scores[0] + " Losses: " + scores[1] + " Draws: " + scores[2]);
+                    result.setTextColor(Color.BLACK);
+                }
+                else if (getResult(player, computer).equals("You lose!")){
+                    db.updateScores( user, "l");
+                    int scores[] = db.getScores(user);
+                    gameDifficulty.setText("Mode: " + difficulty + "\t\t" + user + "\t Wins: " + scores[0] + " Losses: " + scores[1] + " Draws: " + scores[2]);
+                    result.setTextColor(getColor(R.color.red));
+                }
+                else {
+                    db.updateScores( user, "w");
+                    int scores[] = db.getScores(user);
+                    gameDifficulty.setText("Mode: " + difficulty + "\t\t" + user + "\t Wins: " + scores[0] + " Losses: " + scores[1] + " Draws: " + scores[2]);
+                    result.setTextColor(getColor(R.color.blue));
+                }
 
                 result.setText(getResult(player, computer));
             }

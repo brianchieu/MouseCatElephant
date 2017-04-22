@@ -3,15 +3,41 @@ package com.example.brian.mousecatelephant;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.List;
+
 public class HomeActivity extends AppCompatActivity {
     Button exitButton, playEasyButton, playHardButton, rulesButton, multiplayButton;
+    DatabaseHandler db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        db = new DatabaseHandler(this);
+        //db.deleteAll();
+        //insert
+        //Log.d("SQLite", "Inserting ...");
+        //db.addUser(new User("GGG", "1233211232"));
+        /*Log.d("SQLite", "Inserting ...");
+        db.addUser(new User("BBB", "999211232"));
+        Log.d("SQLite", "Inserting ...");
+        db.addUser(new User("CCC", "999211232"));
+        Log.d("SQLite", "Inserting ...");
+        db.addUser(new User("DDD", "999211232"));
+
+        Log.d("SQLite: ", "Reading all contacts..");*/
+        List<User> users = db.getAllUsers();
+
+        for (User cn : users) {
+            String log = "Name: " + cn.getName() +
+                    ", Pass: " + cn.getPassword();
+            // Writing Contacts to log
+            Log.d("SQLite: ", log);
+        }
 
         playEasyButton = (Button) findViewById(R.id.playButton);
         playHardButton = (Button) findViewById(R.id.playButton2);
@@ -52,7 +78,8 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
     public void startPlay(String mode) {
-        Intent intent = new Intent(this, MainActivity.class);
+        //Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         intent.putExtra("game_mode", mode);
         startActivity(intent);
     }
