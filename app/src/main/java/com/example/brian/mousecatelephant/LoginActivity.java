@@ -25,10 +25,11 @@ public class LoginActivity extends AppCompatActivity {
 
         submitButton = (Button) findViewById(R.id.SubmitButton);
         MyOnClickListener myOnClickListener = new MyOnClickListener();
-        submitButton.setOnClickListener(myOnClickListener);
 
         usernameField = (EditText) findViewById(R.id.userField);
         passwordField = (EditText) findViewById(R.id.passField);
+
+        submitButton.setOnClickListener(myOnClickListener);
 
         loginMsg = (TextView) findViewById(R.id.loginMessage);
 
@@ -41,14 +42,14 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Log.d("SQLite: ", "Reading all contacts..");
-            List<User> users = db.getAllUsers();
+            /*List<User> users = db.getAllUsers();
 
             for (User cn : users) {
                 String log = "Name: " + cn.getName() +
                         ", Pass: " + cn.getPassword();
                 // Writing Contacts to log
                 Log.d("SQLite: ", log);
-            }
+            }*/
 
             userInput = usernameField.getText().toString();
             passInput = passwordField.getText().toString();

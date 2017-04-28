@@ -18,10 +18,10 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         db = new DatabaseHandler(this);
-        //db.deleteAll();
+        db.deleteAll();
         //insert
         //Log.d("SQLite", "Inserting ...");
-        //db.addUser(new User("GGG", "1233211232"));
+        db.addUser(new User("GGG", "1233211232"));
         /*Log.d("SQLite", "Inserting ...");
         db.addUser(new User("BBB", "999211232"));
         Log.d("SQLite", "Inserting ...");
@@ -30,14 +30,14 @@ public class HomeActivity extends AppCompatActivity {
         db.addUser(new User("DDD", "999211232"));
 
         Log.d("SQLite: ", "Reading all contacts..");*/
-        List<User> users = db.getAllUsers();
+/*        List<User> users = db.getAllUsers();
 
         for (User cn : users) {
             String log = "Name: " + cn.getName() +
                     ", Pass: " + cn.getPassword();
             // Writing Contacts to log
             Log.d("SQLite: ", log);
-        }
+        }*/
 
         playEasyButton = (Button) findViewById(R.id.playButton);
         playHardButton = (Button) findViewById(R.id.playButton2);
