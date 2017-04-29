@@ -1,16 +1,24 @@
 package com.example.brian.mousecatelephant;
 
 import android.content.Intent;
+import android.graphics.Shader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.graphics.Color;
+import android.graphics.Shader.TileMode;
+import android.graphics.LinearGradient;
+import android.widget.TextView;
+
+
 
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
     Button exitButton, playEasyButton, playHardButton, rulesButton, multiplayButton;
+    TextView text;
     DatabaseHandler db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +47,7 @@ public class HomeActivity extends AppCompatActivity {
             Log.d("SQLite: ", log);
         }*/
 
+
         playEasyButton = (Button) findViewById(R.id.playButton);
         playHardButton = (Button) findViewById(R.id.playButton2);
         exitButton = (Button) findViewById(R.id.exitButton);
@@ -52,6 +61,18 @@ public class HomeActivity extends AppCompatActivity {
         playHardButton.setOnClickListener(myOnClickListener);
         exitButton.setOnClickListener(myOnClickListener);
         rulesButton.setOnClickListener(myOnClickListener);
+
+        text = (TextView) findViewById(R.id.Mqtext);
+        text.bringToFront();
+
+        int[] color = {Color.MAGENTA,Color.CYAN};
+        float[] position = {0, 1};
+        TileMode tile_mode = TileMode.REPEAT;
+        LinearGradient lin_grad = new LinearGradient(0, 0, 0, 35,color,position, tile_mode);
+        Shader shader_gradient = lin_grad;
+        text.getPaint().setShader(shader_gradient);
+
+
     }
     private class MyOnClickListener implements View.OnClickListener{
         @Override

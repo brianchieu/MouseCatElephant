@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+
 public class LoginActivity extends AppCompatActivity {
     EditText usernameField, passwordField;
     Button submitButton;
@@ -28,10 +29,14 @@ public class LoginActivity extends AppCompatActivity {
 
         usernameField = (EditText) findViewById(R.id.userField);
         passwordField = (EditText) findViewById(R.id.passField);
+        usernameField.bringToFront();
+        passwordField.bringToFront();
 
         submitButton.setOnClickListener(myOnClickListener);
+        submitButton.bringToFront();
 
         loginMsg = (TextView) findViewById(R.id.loginMessage);
+        loginMsg.bringToFront();
 
         db = new DatabaseHandler(this);
 

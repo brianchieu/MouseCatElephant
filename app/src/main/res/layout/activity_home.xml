@@ -1,31 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/gradient"
+    android:background="@color/white"
     tools:context="com.example.brian.mousecatelephant.HomeActivity">
 
-    <Button
-        android:text="Rules"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/rulesButton"
-        android:layout_above="@+id/exitButton"
-        android:layout_centerHorizontal="true" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:weightSum="3"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/textView4"
+        android:layout_toStartOf="@+id/textView4">
 
-    <Button
-        android:text="play (hard)"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/playButton2"
-        android:layout_below="@+id/playButton"
-        android:layout_alignRight="@+id/playButton"
-        android:layout_alignEnd="@+id/playButton" />
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/cat_gif2"
+            android:layout_width="112dp"
+            android:layout_height="122dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/catgif" />
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/elephant_gif2"
+            android:layout_width="126dp"
+            android:layout_height="123dp"
+            android:layout_below="@id/cat_gif2"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="0dp"
+            android:src="@drawable/elephantgif" />
+
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/mouse_gif2"
+            android:layout_width="103dp"
+            android:layout_height="99dp"
+            android:layout_below="@id/elephant_gif2"
+            android:layout_gravity="left"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/mousegif" />
+
+    </LinearLayout>
+
+
+
+
 
     <TextView
         android:text="Vs. Computer"
@@ -38,15 +64,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Play (easy)"
-        android:id="@+id/playButton"
-        android:layout_below="@+id/textView4"
-        android:layout_centerHorizontal="true" />
-
     <TextView
         style="@style/overlaytext"
         android:textColor="@color/black"
@@ -55,10 +72,99 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/playButton2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="15dp"
         android:id="@+id/textView5" />
 
-    <Button
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="3"
+        android:background="@color/white"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/rulesButton">
+
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="93dp"
+            android:layout_height="110dp"
+            android:src="@drawable/mousegif"
+            android:id="@+id/mouse_gif"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="0dp"
+            android:layout_gravity="right"
+            android:layout_marginTop="10dp"/>
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/cat_gif"
+            android:layout_width="111dp"
+            android:layout_height="137dp"
+            android:layout_marginRight="0dp"
+            android:src="@drawable/catgif"
+            android:layout_gravity="right"
+            android:layout_below="@id/mouse_gif"
+            android:layout_marginTop="0dp" />
+
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/elephant_gif"
+            android:layout_width="120dp"
+            android:layout_height="117dp"
+            android:layout_below="@id/elephant_gif"
+            android:layout_marginRight="0dp"
+            android:layout_toLeftOf="@+id/mouse_gif"
+            android:layout_gravity="right"
+            android:src="@drawable/elephantgif"
+            android:layout_marginTop="0dp" />
+
+    </LinearLayout>
+
+    <info.hoang8f.widget.FButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Play (easy)"
+        android:id="@+id/playButton"
+        android:layout_below="@+id/textView4"
+        android:layout_centerHorizontal="true"
+        fbutton:buttonColor="@color/fbutton_color_turquoise"
+        fbutton:shadowColor="@color/fbutton_color_green_sea"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="5dp"
+        android:textColor="@color/white"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="5dp" />
+
+    <info.hoang8f.widget.FButton
+        android:layout_centerHorizontal="true"
+        fbutton:buttonColor="@color/fbutton_color_emerald"
+        fbutton:shadowColor="@color/fbutton_color_nephritis"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="5dp"
+        android:textColor="@color/white"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="5dp"
+        android:text="play (hard)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/playButton2"
+        android:layout_below="@+id/playButton"
+        android:layout_alignRight="@+id/playButton"
+        android:layout_alignEnd="@+id/playButton" />
+
+    <info.hoang8f.widget.FButton
+        fbutton:buttonColor="@color/fbutton_color_amethyst"
+        fbutton:shadowColor="@color/fbutton_color_wisteria"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="5dp"
+        android:textColor="@color/white"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="5dp"
+        android:layout_alignRight="@+id/playButton"
+        android:layout_alignEnd="@+id/playButton"
         android:text="multiplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,14 +172,57 @@
         android:layout_below="@+id/textView5"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
+    <info.hoang8f.widget.FButton
+        fbutton:buttonColor="@color/fbutton_color_orange"
+        fbutton:shadowColor="@color/fbutton_color_carrot"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="5dp"
+        android:textColor="@color/white"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="30dp"
+        android:layout_alignRight="@+id/playButton"
+        android:layout_alignEnd="@+id/playButton"
+        android:text="Rules"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rulesButton"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/playButton3" />
+
+    <info.hoang8f.widget.FButton
+        fbutton:buttonColor="@color/fbutton_color_alizarin"
+        fbutton:shadowColor="@color/fbutton_color_pomegranate"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="5dp"
+        android:textColor="@color/white"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="5dp"
+        android:layout_alignRight="@+id/playButton"
+        android:layout_alignEnd="@+id/playButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Exit"
         android:id="@+id/exitButton"
-        android:layout_marginBottom="28dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/rulesButton"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:text="Welcome!                                                                                          "
+        android:id="@+id/Mqtext"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/exitButton"
+        android:layout_marginTop="15dp"
+        android:maxLines="1"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
 
 </RelativeLayout>
