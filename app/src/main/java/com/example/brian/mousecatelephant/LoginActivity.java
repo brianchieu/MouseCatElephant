@@ -1,6 +1,7 @@
 package com.example.brian.mousecatelephant;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,8 @@ import android.view.View;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import com.sdsmdg.tastytoast.TastyToast;
+
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -29,8 +32,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         submitButton = (Button) findViewById(R.id.SubmitButton);
         MyOnClickListener myOnClickListener = new MyOnClickListener();
+
 
         usernameField = (EditText) findViewById(R.id.userField);
         passwordField = (EditText) findViewById(R.id.passField);
@@ -52,7 +57,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private class MyOnClickListener implements View.OnClickListener {
         @Override
-        public void onClick(final View v) {
+        public void onClick(View v) {
+
             Log.d("SQLite: ", "Reading all contacts..");
             /*List<User> users = db.getAllUsers();
 
@@ -67,29 +73,32 @@ public class LoginActivity extends AppCompatActivity {
             passInput = passwordField.getText().toString();
             User user;
 
-
             try {
                 user = db.getUser(userInput);
-                final View tmp = v;
-                addListener(v);
-                mExplosionField.explode(v);
                 if (user.getPassword().equals(passInput)) {
+                    final View tmp = v;
+                    addListener(tmp);
+                    mExplosionField.explode(v);
+                    showSuccessToast(v);
                     new Timer().schedule(new TimerTask() {
                         @Override
                         public void run() {
-                             // Reset the view after explosion
-                            reset(tmp);
+                            reset(tmp);// Reset the view after explosion
                             startPlay(gameMode, db.getUser(userInput).getName());
                         }
                     }, 1200);
                 }
-                else loginMsg.setText("Invalid username or password");
+
+                else {
+                    showErrorToast(v);
+                }
             }
             catch (Exception e){
                 if (passInput.equals(null) || passInput.equals("")) loginMsg.setText("Please enter a valid password for new user.");
                 else {
                     db.addUser(new User(userInput, passInput));
-                    loginMsg.setText("Created new user: " + userInput + ". Please re-submit.");
+                    reset(v);
+                    showWarningToast(v);
                 }
             }
         }
@@ -132,4 +141,20 @@ public class LoginActivity extends AppCompatActivity {
             root.setAlpha(1);
         }
     }
+
+    public void showSuccessToast(View view) {
+        TastyToast.makeText(getApplicationContext(), "Let's go !", TastyToast.LENGTH_LONG,
+                TastyToast.SUCCESS);
+    }
+
+    public void showWarningToast(View view) {
+        TastyToast.makeText(getApplicationContext(), "Created new user !", TastyToast.LENGTH_LONG,
+                TastyToast.WARNING);
+    }
+
+    public void showErrorToast(View view) {
+        TastyToast.makeText(getApplicationContext(), "Invalid username or password !", TastyToast.LENGTH_LONG,
+                TastyToast.ERROR);
+    }
+
 }

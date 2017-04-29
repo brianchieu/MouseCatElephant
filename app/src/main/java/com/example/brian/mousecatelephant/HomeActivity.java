@@ -30,7 +30,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
         db = new DatabaseHandler(this);
         db.deleteAll();
         //insert
@@ -84,7 +83,7 @@ public class HomeActivity extends AppCompatActivity {
     }
     private class MyOnClickListener implements View.OnClickListener{
         @Override
-        public void onClick(final View v){
+        public void onClick(View v){
             switch(v.getId()){
                 case R.id.playButton:
                     addListener(findViewById(R.id.playButton));
@@ -100,7 +99,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 case R.id.playButton2:
                     addListener(findViewById(R.id.playButton2));
-                    mExplosionField.explode(v);
+                    mExplosionField.explode(findViewById(R.id.playButton2));
                     new Timer().schedule(new TimerTask() {
                         @Override
                         public void run() {

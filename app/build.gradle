@@ -32,4 +32,7 @@ dependencies {
     compile 'info.hoang8f:fbutton:1.0.5'
 
     compile 'tyrantgit:explosionfield:1.0.1'
+
+    compile 'com.sdsmdg.tastytoast:tastytoast:0.1.1'
+
 }
