@@ -75,6 +75,7 @@
         fbutton:shadowHeight="5dp"
         fbutton:cornerRadius="5dp"
         android:text="SUBMIT"
+        android:background="?attr/selectableItemBackground"
         android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -82,5 +83,6 @@
         android:layout_marginLeft="45dp"
         android:layout_marginTop="15dp"
         android:id="@+id/SubmitButton" />
+
 
 </RelativeLayout>
