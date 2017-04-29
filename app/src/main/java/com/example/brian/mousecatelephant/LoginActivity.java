@@ -18,7 +18,6 @@ import java.util.TimerTask;
 import com.sdsmdg.tastytoast.TastyToast;
 
 
-
 public class LoginActivity extends AppCompatActivity {
     EditText usernameField, passwordField;
     Button submitButton;
@@ -148,7 +147,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void showWarningToast(View view) {
-        TastyToast.makeText(getApplicationContext(), "Created new user !", TastyToast.LENGTH_LONG,
+        TastyToast.makeText(getApplicationContext(), "Created new user ! \nSubmit again to login !", TastyToast.LENGTH_LONG,
                 TastyToast.WARNING);
     }
 
@@ -157,4 +156,10 @@ public class LoginActivity extends AppCompatActivity {
                 TastyToast.ERROR);
     }
 
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+    }
 }
