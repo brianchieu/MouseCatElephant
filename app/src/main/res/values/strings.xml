@@ -3,6 +3,7 @@
     <string name="rulestitle">
         <u>Rules</u>
     </string>
+    <color name="white">#FFFFFF</color>
     <string name="rules">
         \t1) Choose among a <font fgcolor='#FF696969'><b>mouse</b></font>, a <font fgcolor='#D0A0A0C0'><b>cat</b></font>, and an <font fgcolor='#FF708090'><b>elephant</b></font>.\n
         \t2) Your opponent will choose an animal after.\n
