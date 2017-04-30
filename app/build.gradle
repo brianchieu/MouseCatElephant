@@ -35,4 +35,9 @@ dependencies {
 
     compile 'com.sdsmdg.tastytoast:tastytoast:0.1.1'
 
+    compile 'com.yalantis:phoenix:1.2.3'
+
+    compile 'com.romainpiel.shimmer:library:1.4.0@aar'
+
+    compile 'com.nightonke:boommenu:2.0.9'
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_login"
     android:layout_width="match_parent"
@@ -18,7 +19,6 @@
         android:layout_marginTop="140dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
-
 
     <EditText
         android:layout_width="wrap_content"
@@ -84,5 +84,45 @@
         android:layout_marginTop="15dp"
         android:id="@+id/SubmitButton" />
 
+    <info.hoang8f.widget.FButton
+        fbutton:buttonColor="@color/fbutton_color_turquoise"
+        fbutton:shadowColor="@color/fbutton_color_green_sea"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="5dp"
+        android:background="?attr/selectableItemBackground"
+        android:textColor="@color/white"
+        android:id="@+id/RegisterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/SubmitButton"
+        android:layout_alignStart="@+id/SubmitButton"
+        android:layout_below="@+id/SubmitButton"
+        android:layout_marginTop="10dp"
+        android:text="Register"/>
+
+    <com.yalantis.phoenix.PullToRefreshView
+        android:id="@+id/pull_to_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/list_view"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.yalantis.phoenix.PullToRefreshView>
+
+    <com.nightonke.boommenu.BoomMenuButton
+        android:id="@+id/bmb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        app:bmb_buttonEnum="textInsideCircle"
+        app:bmb_piecePlaceEnum="piecePlace_dot_9_1"
+        app:bmb_buttonPlaceEnum="buttonPlace_sc_9_1" />
 
 </RelativeLayout>

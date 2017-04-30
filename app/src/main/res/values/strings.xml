@@ -12,4 +12,6 @@
         \t5) The <font fgcolor='#D0A0A0C0'><b>cat</b></font> beats the <font fgcolor='#FF696969'><b>mouse</b></font>.\n
 
     </string>
+    <string name="text_inside_circle_button_text_normal">Exit</string>
+
 </resources>
