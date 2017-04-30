@@ -29,6 +29,14 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.0.0'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
     compile 'info.hoang8f:fbutton:1.0.5'
+<<<<<<< HEAD
     compile 'com.android.support.constraint:constraint-layout:+'
     testCompile 'junit:junit:4.12'
+=======
+
+    compile 'tyrantgit:explosionfield:1.0.1'
+
+    compile 'com.sdsmdg.tastytoast:tastytoast:0.1.1'
+
+>>>>>>> fdcca1f1ae1614c0228c0cfa26e082d98ebe0d7d
 }

@@ -75,6 +75,7 @@
         fbutton:shadowHeight="5dp"
         fbutton:cornerRadius="5dp"
         android:text="SUBMIT"
+        android:background="?attr/selectableItemBackground"
         android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -83,6 +84,7 @@
         android:layout_marginTop="15dp"
         android:id="@+id/SubmitButton" />
 
+<<<<<<< HEAD
     <Button
         android:id="@+id/RegisterButton"
         android:layout_width="wrap_content"
@@ -92,5 +94,7 @@
         android:layout_alignStart="@+id/SubmitButton"
         android:layout_marginBottom="37dp"
         android:text="Register" />
+=======
+>>>>>>> fdcca1f1ae1614c0228c0cfa26e082d98ebe0d7d
 
 </RelativeLayout>

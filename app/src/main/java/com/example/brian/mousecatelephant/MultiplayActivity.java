@@ -1,6 +1,7 @@
 package com.example.brian.mousecatelephant;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -157,5 +158,11 @@ public class MultiplayActivity extends AppCompatActivity {
             if (computer.equals("Cat")) return "Player 1 wins!";
             else return "Player 2 wins!";
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
     }
 }
