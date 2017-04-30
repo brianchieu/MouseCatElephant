@@ -123,11 +123,10 @@ public class LoginActivity extends AppCompatActivity {
                             showErrorToast(v);
                         }
                     } catch (Exception e) {
-                        if (passInput.equals(null) || passInput.equals("")) showErrorToast(v);
+                        if (userInput.equals(null) || userInput.equals("") || passInput.equals(null) || passInput.equals("")) showWarningToast(v);
                         else {
-                            db.addUser(new User(userInput, passInput));
                             reset(v);
-                            showWarningToast(v);
+                            showErrorToast(v);
                         }
                     }
                     break;
@@ -186,7 +185,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         public void showWarningToast(View view) {
-            TastyToast.makeText(getApplicationContext(), "Created new user ! \nSubmit again to login !", TastyToast.LENGTH_SHORT,
+            TastyToast.makeText(getApplicationContext(), "Please input a valid username!", TastyToast.LENGTH_SHORT,
                     TastyToast.WARNING);
         }
 
