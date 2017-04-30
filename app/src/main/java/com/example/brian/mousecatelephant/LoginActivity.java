@@ -14,7 +14,7 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
     EditText usernameField, passwordField;
-    Button submitButton;
+    Button submitButton, registerButton;
     String userInput, passInput, gameMode;
     TextView loginMsg;
     DatabaseHandler db;
@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         submitButton = (Button) findViewById(R.id.SubmitButton);
+        registerButton = (Button) findViewById(R.id.RegisterButton);
         MyOnClickListener myOnClickListener = new MyOnClickListener();
 
         usernameField = (EditText) findViewById(R.id.userField);
@@ -34,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
 
         submitButton.setOnClickListener(myOnClickListener);
         submitButton.bringToFront();
+        registerButton.setOnClickListener(myOnClickListener);
+        registerButton.bringToFront();
 
         loginMsg = (TextView) findViewById(R.id.loginMessage);
         loginMsg.bringToFront();
@@ -46,30 +49,40 @@ public class LoginActivity extends AppCompatActivity {
     private class MyOnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            Log.d("SQLite: ", "Reading all contacts..");
-            /*List<User> users = db.getAllUsers();
+            switch(v.getId()){
+                case R.id.SubmitButton:
+                    //Log.d("SQLite: ", "Reading all contacts..");
+                    /*List<User> users = db.getAllUsers();
 
-            for (User cn : users) {
-                String log = "Name: " + cn.getName() +
-                        ", Pass: " + cn.getPassword();
-                // Writing Contacts to log
-                Log.d("SQLite: ", log);
-            }*/
+                    for (User cn : users) {
+                        String log = "Name: " + cn.getName() +
+                                ", Pass: " + cn.getPassword();
+                        // Writing Contacts to log
+                        Log.d("SQLite: ", log);
+                    }*/
 
-            userInput = usernameField.getText().toString();
-            passInput = passwordField.getText().toString();
-            User user;
-            try {
-                user = db.getUser(userInput);
-                if (user.getPassword().equals(passInput)) startPlay(gameMode, user.getName());
-                else loginMsg.setText("Invalid username or password");
-            }
-            catch (Exception e){
-                if (passInput.equals(null) || passInput.equals("")) loginMsg.setText("Please enter a valid password for new user.");
-                else {
-                    db.addUser(new User(userInput, passInput));
-                    loginMsg.setText("Created new user: " + userInput + ". Please re-submit.");
-                }
+                    userInput = usernameField.getText().toString();
+                    passInput = passwordField.getText().toString();
+                    User user;
+                    try {
+                        user = db.getUser(userInput);
+                        if (user.getPassword().equals(passInput)) startPlay(gameMode, user.getName());
+                        else loginMsg.setText("Invalid username or password");
+                    }
+                    catch (Exception e) {
+                        if (passInput.equals(null) || passInput.equals(""))
+                            loginMsg.setText("Invalid username or password.");
+        /*                else {
+                            db.addUser(new User(userInput, passInput));
+                            loginMsg.setText("Created new user: " + userInput + ". Please re-submit.");
+                        }*/
+                    }
+                    break;
+                case R.id.RegisterButton:
+                    startRegistration();
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -77,6 +90,10 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("game_mode", mode);
         intent.putExtra("user_name", user);
+        startActivity(intent);
+    }
+    public void startRegistration(){
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 }
