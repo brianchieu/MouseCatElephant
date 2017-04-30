@@ -166,8 +166,7 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         }
-
-
+    
         private void reset(View root) {
             if (root instanceof ViewGroup) {
                 ViewGroup parent = (ViewGroup) root;
