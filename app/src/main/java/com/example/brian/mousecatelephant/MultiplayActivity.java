@@ -1,6 +1,5 @@
 package com.example.brian.mousecatelephant;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -12,7 +11,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
 
 public class MultiplayActivity extends AppCompatActivity {
     ImageButton mouseButton, catButton, elephantButton;

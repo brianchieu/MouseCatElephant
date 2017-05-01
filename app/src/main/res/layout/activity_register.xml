@@ -7,7 +7,12 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context="com.example.brian.mousecatelephant.RegisterActivity">
-    <EditText
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        app:met_floatingLabel="highlight"
+        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@+id/passField"
+        android:layout_alignStart="@+id/passField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Name"
@@ -17,11 +22,9 @@
         tools:layout_editor_absoluteY="188dp"
         tools:layout_editor_absoluteX="47dp"
         android:layout_marginTop="137dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/passField"
-        android:layout_alignStart="@+id/passField" />
+        android:layout_alignParentTop="true"/>
 
-    <EditText
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
@@ -33,6 +36,7 @@
         android:layout_alignLeft="@+id/SubmitButton"
         android:layout_alignStart="@+id/SubmitButton"
         android:layout_below="@+id/userField" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

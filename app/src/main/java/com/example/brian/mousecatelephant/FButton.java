@@ -17,10 +17,6 @@ import android.widget.Button;
 
 import info.hoang8f.fbutton.R;
 
-/**
- * Created by hoang8f on 5/5/14.
- */
-
 public class FButton extends android.support.v7.widget.AppCompatButton implements View.OnTouchListener {
 
     //Custom values

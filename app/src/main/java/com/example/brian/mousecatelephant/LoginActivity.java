@@ -1,27 +1,25 @@
 package com.example.brian.mousecatelephant;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.view.inputmethod.InputMethodManager;
 import tyrantgit.explosionfield.ExplosionField;
 import java.util.Timer;
 import java.util.TimerTask;
 import com.sdsmdg.tastytoast.TastyToast;
 import com.yalantis.phoenix.PullToRefreshView;
-
-import com.nightonke.boommenu.BoomButtons.TextInsideCircleButton;
 import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
 import com.nightonke.boommenu.BoomMenuButton;
 import com.nightonke.boommenu.ButtonEnum;
 import com.nightonke.boommenu.Piece.PiecePlaceEnum;
-
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -32,23 +30,27 @@ public class LoginActivity extends AppCompatActivity {
     DatabaseHandler db;
     private PullToRefreshView mPullToRefreshView;
     private ExplosionField mExplosionField;
-    private BoomMenuButton bmb;
+    private BoomMenuButton bmb, boomMenuButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         mPullToRefreshView = (PullToRefreshView) findViewById(R.id.pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPullToRefreshView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mPullToRefreshView.setRefreshing(false);
-                    }
-                }, 300);
+            mPullToRefreshView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mPullToRefreshView.setRefreshing(false);
+                    refresh(); //Refresh
+                }
+            }, 1000);
             }
         });
 
@@ -59,6 +61,25 @@ public class LoginActivity extends AppCompatActivity {
 
         usernameField = (EditText) findViewById(R.id.userField);
         passwordField = (EditText) findViewById(R.id.passField);
+
+        usernameField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        passwordField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
         usernameField.bringToFront();
         passwordField.bringToFront();
 
@@ -89,6 +110,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
+
                 case R.id.SubmitButton:
 
                     //Log.d("SQLite: ", "Reading all contacts..");
@@ -123,16 +145,27 @@ public class LoginActivity extends AppCompatActivity {
                             showErrorToast(v);
                         }
                     } catch (Exception e) {
-                        if (userInput.equals(null) || userInput.equals("") || passInput.equals(null) || passInput.equals("")) showWarningToast(v);
+                        if (passInput.equals(null) || passInput.equals("")) showErrorToast(v);
                         else {
+                            //db.addUser(new User(userInput, passInput));
                             reset(v);
-                            showErrorToast(v);
+                            showWarningToast(v);
                         }
                     }
                     break;
 
                 case R.id.RegisterButton:
-                    startRegistration();
+                    final View tmp = v;
+                    addListener(tmp);
+                    mExplosionField.explode(v);
+                    signUpToast(v);
+                    new Timer().schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            reset(tmp);// Reset the view after explosion
+                            startRegistration();
+                        }
+                    }, 1200);
                     break;
 
                 default:
@@ -141,69 +174,85 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-        public void startPlay(String mode, String user) {
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra("game_mode", mode);
-            intent.putExtra("user_name", user);
-            startActivity(intent);
-        }
+    public void startPlay(String mode, String user) {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("game_mode", mode);
+        intent.putExtra("user_name", user);
+        startActivity(intent);
+    }
 
-        private void addListener(View root) {
-            if (root instanceof ViewGroup) {
-                ViewGroup parent = (ViewGroup) root;
-                for (int i = 0; i < parent.getChildCount(); i++) {
-                    addListener(parent.getChildAt(i));
-                }
-            } else {
-                root.setClickable(true);
-                root.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mExplosionField.explode(v);
-                        v.setOnClickListener(null);
-                    }
-                });
+    private void addListener(View root) {
+        if (root instanceof ViewGroup) {
+            ViewGroup parent = (ViewGroup) root;
+            for (int i = 0; i < parent.getChildCount(); i++) {
+                addListener(parent.getChildAt(i));
             }
-        }
-    
-        private void reset(View root) {
-            if (root instanceof ViewGroup) {
-                ViewGroup parent = (ViewGroup) root;
-                for (int i = 0; i < parent.getChildCount(); i++) {
-                    reset(parent.getChildAt(i));
+        } else {
+            root.setClickable(true);
+            root.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                mExplosionField.explode(v);
+                v.setOnClickListener(null);
                 }
-            } else {
-                root.setScaleX(1);
-                root.setScaleY(1);
-                root.setAlpha(1);
+            });
+        }
+    }
+
+    private void reset(View root) {
+        if (root instanceof ViewGroup) {
+            ViewGroup parent = (ViewGroup) root;
+            for (int i = 0; i < parent.getChildCount(); i++) {
+                reset(parent.getChildAt(i));
             }
+        } else {
+            root.setScaleX(1);
+            root.setScaleY(1);
+            root.setAlpha(1);
         }
+    }
 
-        public void showSuccessToast(View view) {
-            TastyToast.makeText(getApplicationContext(), "Let's go !", TastyToast.LENGTH_SHORT,
-                    TastyToast.SUCCESS);
-        }
+    public void showSuccessToast(View view) {
+        TastyToast.makeText(getApplicationContext(), "Let's go !", TastyToast.LENGTH_SHORT,
+                TastyToast.SUCCESS);
+    }
 
-        public void showWarningToast(View view) {
-            TastyToast.makeText(getApplicationContext(), "Please input a valid username!", TastyToast.LENGTH_SHORT,
-                    TastyToast.WARNING);
-        }
+    public void showWarningToast(View view) {
+        TastyToast.makeText(getApplicationContext(), "Please sign in first !", TastyToast.LENGTH_SHORT,
+                TastyToast.WARNING);
+    }
 
-        public void showErrorToast(View view) {
-            TastyToast.makeText(getApplicationContext(), "Invalid username or password !", TastyToast.LENGTH_SHORT,
-                    TastyToast.ERROR);
-        }
+    public void showErrorToast(View view) {
+        TastyToast.makeText(getApplicationContext(), "Invalid username or password !", TastyToast.LENGTH_SHORT,
+                TastyToast.ERROR);
+    }
 
-        public void startRegistration() {
-            Intent intent = new Intent(this, RegisterActivity.class);
-            startActivity(intent);
-        }
+    public void signUpToast(View view) {
+        TastyToast.makeText(getApplicationContext(), "Let's create an account !", TastyToast.LENGTH_SHORT,
+                TastyToast.SUCCESS);
+    }
 
-        @Override
-        public void onBackPressed() {
-            // Do Here what ever you want do on back press;
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
-        }
+    public void startRegistration() {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+    }
+
+    public void refresh() {
+        // Do Here what ever you want do on back press;
+        Intent refresh = new Intent(this, LoginActivity.class);
+        startActivity(refresh);
+    }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 }
 
