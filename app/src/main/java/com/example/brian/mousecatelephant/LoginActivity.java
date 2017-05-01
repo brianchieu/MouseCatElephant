@@ -44,13 +44,13 @@ public class LoginActivity extends AppCompatActivity {
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPullToRefreshView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mPullToRefreshView.setRefreshing(false);
-                    }
-                }, 300);
-                refresh(); //Refresh
+            mPullToRefreshView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mPullToRefreshView.setRefreshing(false);
+                    refresh(); //Refresh
+                }
+            }, 1000);
             }
         });
 
@@ -192,8 +192,8 @@ public class LoginActivity extends AppCompatActivity {
             root.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mExplosionField.explode(v);
-                    v.setOnClickListener(null);
+                mExplosionField.explode(v);
+                v.setOnClickListener(null);
                 }
             });
         }
