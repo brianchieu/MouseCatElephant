@@ -1,13 +1,16 @@
 package com.example.brian.mousecatelephant;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.view.inputmethod.InputMethodManager;
 import tyrantgit.explosionfield.ExplosionField;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -27,12 +30,15 @@ public class LoginActivity extends AppCompatActivity {
     DatabaseHandler db;
     private PullToRefreshView mPullToRefreshView;
     private ExplosionField mExplosionField;
-    private BoomMenuButton bmb;
+    private BoomMenuButton bmb, boomMenuButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         mPullToRefreshView = (PullToRefreshView) findViewById(R.id.pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
@@ -44,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                         mPullToRefreshView.setRefreshing(false);
                     }
                 }, 300);
+                refresh(); //Refresh
             }
         });
 
@@ -54,6 +61,25 @@ public class LoginActivity extends AppCompatActivity {
 
         usernameField = (EditText) findViewById(R.id.userField);
         passwordField = (EditText) findViewById(R.id.passField);
+
+        usernameField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        passwordField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
         usernameField.bringToFront();
         passwordField.bringToFront();
 
@@ -80,9 +106,7 @@ public class LoginActivity extends AppCompatActivity {
         bmb.addBuilder(BuilderManager.getTextInsideCircleButtonBuilder());
     }
 
-
     private class MyOnClickListener implements View.OnClickListener {
-
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
@@ -220,11 +244,15 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void ExitPressed() {
-        Intent startMain = new Intent(Intent.ACTION_MAIN);
-        startMain.addCategory(Intent.CATEGORY_HOME);
-        startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(startMain);
+    public void refresh() {
+        // Do Here what ever you want do on back press;
+        Intent refresh = new Intent(this, LoginActivity.class);
+        startActivity(refresh);
+    }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }
 
