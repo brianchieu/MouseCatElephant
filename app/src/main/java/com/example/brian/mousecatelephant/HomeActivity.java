@@ -129,6 +129,7 @@ public class HomeActivity extends AppCompatActivity {
                         public void run() {
                             reset(findViewById(R.id.exitButton)); // Reset the view after explosion
                             finish();
+                            onBackPressed();
                         }
                     }, 1200);
                     break;
